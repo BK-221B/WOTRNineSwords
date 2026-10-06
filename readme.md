@@ -1,4 +1,11 @@
 # Nine Swords
+
+> **声明 / Notice**
+>
+> 本仓库是基于 [V0idhead/WOTRNineSwords](https://github.com/V0idhead/WOTRNineSwords)（原作者：V0idhead）的二次修改版本，主要包含个人调整和中文翻译，仅供个人自玩使用，非官方版本。原 mod 的全部版权归原作者所有，本仓库沿用原项目的 MIT 许可证（见 `LICENSE.txt`）。如需正式版本，请前往原作者仓库。
+>
+> This repository is a personally modified fork of [V0idhead/WOTRNineSwords](https://github.com/V0idhead/WOTRNineSwords) by V0idhead, with personal tweaks and Chinese localization, intended for personal use only. It is not an official release. All credit for the original mod goes to the original author; this fork keeps the original MIT License (see `LICENSE.txt`).
+
 A mod for Pathfinder: Wrath of the Righteous implementing the classes found in the Tome of Battle: Nine Swords supplement (https://dndtools.net/rulebooks/supplementals-35--5/tome-of-battle-the-book-of-nine-swords--88/)
 There were some changes necessary both to adapt to the Pathfinder ruleset as well as accommodate Wrath of the Righteous
 
