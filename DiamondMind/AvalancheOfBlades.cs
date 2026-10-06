@@ -1,0 +1,79 @@
+using BlueprintCore.Actions.Builder;
+using BlueprintCore.Actions.Builder.ContextEx;
+using BlueprintCore.Blueprints.CustomConfigurators.Classes;
+using BlueprintCore.Blueprints.CustomConfigurators.UnitLogic.Abilities;
+using BlueprintCore.Blueprints.CustomConfigurators.UnitLogic.Buffs;
+using BlueprintCore.Blueprints.References;
+using BlueprintCore.Utils.Types;
+using Kingmaker.Blueprints.Classes.Selection;
+using Kingmaker.ElementsSystem;
+using Kingmaker.Enums;
+using Kingmaker.UnitLogic.Abilities.Blueprints;
+using Kingmaker.UnitLogic.Buffs.Blueprints;
+using Kingmaker.UnitLogic.Commands.Base;
+using Kingmaker.UnitLogic.Mechanics;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using VoidHeadWOTRNineSwords.Common;
+using VoidHeadWOTRNineSwords.Components;
+using VoidHeadWOTRNineSwords.StoneDragon;
+using VoidHeadWOTRNineSwords.Warblade;
+
+namespace VoidHeadWOTRNineSwords.DiamondMind
+{
+  //https://dndtools.net/spells/tome-of-battle-the-book-of-nine-swords--88/avalanche-blades--3620/
+  static class AvalancheOfBlades
+  {
+    public const string Guid = "74C4B005-F777-4D9C-8C65-E9F31201F4FD";
+    const string name = "AvalancheOfBlades.Name";
+    const string desc = "AvalancheOfBlades.Desc";
+    const string icon = Helpers.IconPrefix + "avalancheofblades.png";
+
+    public static void Configure()
+    {
+      Main.Logger.Info($"Configuring {nameof(AvalancheOfBlades)}");
+
+      /*var buff = BuffConfigurator.New("AvalancheOfBladesBuff", "DF324072-D04C-47C5-A289-022B5B203144")
+        .SetDisplayName(name)
+        .SetDescription(desc)
+        .AddInitiatorAttackRollTrigger(
+          onlyHit: true,
+          action: ActionsBuilder.New().BuffActionAddStatBonus(ModifierDescriptor.UntypedStackable, Kingmaker.EntitySystem.Stats.StatType.AdditionalAttackBonus, new ContextValue { Value = -4 }))
+        .Configure();*/
+
+      var ability = AbilityConfigurator.New(name, "6F55DCF7-6E10-494B-BF5F-9A882B1D52A1")
+        .SetDisplayName(name)
+        .SetDescription(desc)
+        .SetIcon(icon)
+        .SetAnimation(Kingmaker.Visual.Animation.Kingmaker.Actions.UnitAnimationActionCastSpell.CastAnimationStyle.Special)
+        .SetCanTargetEnemies()
+        .SetCanTargetFriends(false)
+        .SetCanTargetSelf(false)
+        .SetRange(AbilityRange.Weapon)
+        .SetActionType(UnitCommand.CommandType.Standard)
+        .SetShouldTurnToTarget()
+        .SetType(AbilityType.CombatManeuver)
+        .AddAbilityRequirementHasItemInHands(type: Kingmaker.UnitLogic.Abilities.Components.AbilityRequirementHasItemInHands.RequirementType.HasMeleeWeapon)
+        .AddAbilityEffectRunAction(ActionsBuilder.New().Add<MeleeAttackAvalanche>())
+        .AddAbilityResourceLogic(1, requiredResource: ManeuverResources.ManeuverResourceGuid, isSpendResource: true)
+        .Configure();
+
+      var spell = FeatureConfigurator.New("AvalancheOfBlades", Guid, AllManeuversAndStances.featureGroup)
+        .SetDisplayName(name)
+        .SetDescription(desc)
+        .SetIcon(icon)
+        .AddFeatureTagsComponent(FeatureTag.Attack | FeatureTag.Melee)
+        .AddFacts(new() { ability })
+        .AddCombatStateTrigger(ActionsBuilder.New().RestoreResource(ManeuverResources.ManeuverResourceGuid))
+        .AddPrerequisiteFeature(InitiatorLevels.Lvl7Guid)
+#if !DEBUG
+        .AddPrerequisiteFeature(DisciplineProficencies.DiamondMindProficencyGuid, hideInUI: true)
+        .AddPrerequisiteFeaturesFromList(amount: 3, features: AllManeuversAndStances.DiamondMindGuids.Except([Guid]).ToList())
+#endif
+        .Configure();
+    }
+  }
+}

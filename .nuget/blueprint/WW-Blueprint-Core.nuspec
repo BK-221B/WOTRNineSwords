@@ -1,0 +1,17 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2012/06/nuspec.xsd">
+  <metadata>
+    <id>WW-Blueprint-Core</id>
+    <version>2.8.6</version>
+    <authors>WittleWolfie</authors>
+    <license type="file">content\BlueprintCore\LICENSE</license>
+    <licenseUrl>https://aka.ms/deprecateLicenseUrl</licenseUrl>
+    <projectUrl>https://wittlewolfie.github.io/WW-Blueprint-Core/</projectUrl>
+    <description>A library to simplify modifying Pathfinder: Wrath of the Righteous.</description>
+    <tags>pathfinder wrath</tags>
+    <repository type="git" url="https://github.com/WittleWolfie/WW-Blueprint-Core" commit="eab7a42f137b0a7e5c2c780922fbbe1e0eee5a7d" />
+    <dependencies>
+      <group targetFramework=".NETFramework4.7.2" />
+    </dependencies>
+  </metadata>
+</package>
